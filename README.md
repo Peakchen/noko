@@ -1,0 +1,2 @@
+# noko
+struct by c++
