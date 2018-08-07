@@ -1,0 +1,7 @@
+﻿  TAsyncProtocolProcessor.cpp
+  TEvhttpClientChannel.cpp
+  TEvhttpServer.cpp
+  TNonblockingServer.cpp
+  TNonblockingServerSocket.cpp
+  TNonblockingSSLServerSocket.cpp
+  libthriftnb.vcxproj -> D:\git\third\thirft\x64\Release\libthriftnb.lib

@@ -1,0 +1,57 @@
+﻿C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets(392,5): warning MSB8028: The intermediate directory (x64\Release\obj\) contains files shared from another project (libthriftnb.vcxproj).  This can lead to incorrect clean and rebuild behavior.
+C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets(936,5): warning MSB8027: Two or more files with the name of TSimpleServer.cpp will produce outputs to the same location. This can lead to an incorrect build result.  The files involved are src\thrift\server\TSimpleServer.cpp, src\thrift\server\TSimpleServer.cpp.
+C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets(936,5): warning MSB8027: Two or more files with the name of TThreadPoolServer.cpp will produce outputs to the same location. This can lead to an incorrect build result.  The files involved are src\thrift\server\TThreadPoolServer.cpp, src\thrift\server\TThreadPoolServer.cpp.
+C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets(936,5): warning MSB8027: Two or more files with the name of TThreadedServer.cpp will produce outputs to the same location. This can lead to an incorrect build result.  The files involved are src\thrift\server\TThreadedServer.cpp, src\thrift\server\TThreadedServer.cpp.
+  TAsyncChannel.cpp
+  TConcurrentClientSyncInfo.cpp
+  BoostMonitor.cpp
+  BoostMutex.cpp
+  BoostThreadFactory.cpp
+  StdThreadFactory.cpp
+  ThreadManager.cpp
+  TimerManager.cpp
+  Util.cpp
+  PeekProcessor.cpp
+  TBase64Utils.cpp
+  TDebugProtocol.cpp
+  TJSONProtocol.cpp
+  TProtocol.cpp
+  TMultiplexedProtocol.cpp
+  TSimpleServer.cpp
+  TThreadPoolServer.cpp
+  TThreadedServer.cpp
+  TConnectedClient.cpp
+  TNonblockingServer.cpp
+  正在编译...
+  TServerFramework.cpp
+  TSimpleServer.cpp
+  TThreadedServer.cpp
+  TThreadPoolServer.cpp
+  TApplicationException.cpp
+  TOutput.cpp
+  TBufferTransports.cpp
+src\thrift\transport\TBufferTransports.cpp(371): warning C4244: “=”: 从“uint64_t”转换到“uint32_t”，可能丢失数据
+src\thrift\transport\TBufferTransports.cpp(385): warning C4244: “=”: 从“uint64_t”转换到“uint32_t”，可能丢失数据
+  TFDTransport.cpp
+  THttpClient.cpp
+  THttpServer.cpp
+  THttpTransport.cpp
+  TPipe.cpp
+  TPipeServer.cpp
+  TServerSocket.cpp
+  TSimpleFileTransport.cpp
+  TFileTransport.cpp
+  TSocket.cpp
+  TSSLSocket.cpp
+  TTransportException.cpp
+  TTransportUtils.cpp
+  正在编译...
+  GetTimeOfDay.cpp
+  OverlappedSubmissionThread.cpp
+  SocketPair.cpp
+  TWinsockSingleton.cpp
+  WinFcntl.cpp
+x64\Release\obj\TSimpleServer.obj : warning LNK4042: 对象被多次指定；已忽略多余的指定
+x64\Release\obj\TThreadedServer.obj : warning LNK4042: 对象被多次指定；已忽略多余的指定
+x64\Release\obj\TThreadPoolServer.obj : warning LNK4042: 对象被多次指定；已忽略多余的指定
+  libthrift.vcxproj -> D:\git\third\thirft\x64\Release\libthrift.lib
