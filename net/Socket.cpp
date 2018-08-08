@@ -45,7 +45,7 @@ BOOL Socket::create( )
 {
 	__ENTER_FUNCTION_FOXNET
 
-	m_SocketID = SocketAPI::socket_ex( AF_INET , SOCK_STREAM , 0 );
+	m_SocketID = select_socket_api::socket_ex( AF_INET , SOCK_STREAM , 0 );
     
 	memset( &m_SockAddr , 0 , sizeof(m_SockAddr) );
 	
@@ -92,7 +92,7 @@ VOID Socket::close ()
 	{
 		_MY_TRY 
 		{
-			SocketAPI::closesocket_ex( m_SocketID );
+			select_socket_api::closesocket_ex( m_SocketID );
 		} 
 		_MY_CATCH
 		{
@@ -117,7 +117,7 @@ BOOL Socket::connect ()
 	m_SockAddr.sin_port = htons(m_Port);
 	
 	// try to connect to peer host
-	BOOL result = SocketAPI::connect_ex( m_SocketID , (const struct sockaddr *)&m_SockAddr , sizeof(m_SockAddr) );
+	BOOL result = select_socket_api::connect_ex( m_SocketID , (const struct sockaddr *)&m_SockAddr , sizeof(m_SockAddr) );
 	if( result)
 		return TRUE ;
 	else
@@ -146,7 +146,7 @@ UINT Socket::send (const VOID* buf, UINT len, UINT flags)
 { 
 	__ENTER_FUNCTION_FOXNET
 
-	return SocketAPI::send_ex( m_SocketID , buf , len , flags );
+	return select_socket_api::send_ex( m_SocketID , buf , len , flags );
 
 	__LEAVE_FUNCTION_FOXNET
 
@@ -157,7 +157,7 @@ UINT Socket::receive (VOID* buf, UINT len, UINT flags)
 { 
 	__ENTER_FUNCTION_FOXNET
 
-	return SocketAPI::recv_ex( m_SocketID , buf , len , flags );
+	return select_socket_api::recv_ex( m_SocketID , buf , len , flags );
 
 	__LEAVE_FUNCTION_FOXNET
 
@@ -168,7 +168,7 @@ UINT Socket::available ()const
 { 
 	__ENTER_FUNCTION_FOXNET
 
-	return SocketAPI::availablesocket_ex( m_SocketID );
+	return select_socket_api::availablesocket_ex( m_SocketID );
 
 	__LEAVE_FUNCTION_FOXNET
 
@@ -182,7 +182,7 @@ UINT Socket::getLinger ()const
 	struct linger ling;
 	UINT len = sizeof(ling);
 	
-	SocketAPI::getsockopt_ex( m_SocketID , SOL_SOCKET , SO_LINGER , &ling , &len );
+	select_socket_api::getsockopt_ex( m_SocketID , SOL_SOCKET , SO_LINGER , &ling , &len );
 	
 	return ling.l_linger;
 
@@ -195,7 +195,7 @@ SOCKET Socket::accept( struct sockaddr* addr, UINT* addrlen )
 {
 	__ENTER_FUNCTION_FOXNET
 
-	return SocketAPI::accept_ex( m_SocketID, addr, addrlen ) ;
+	return select_socket_api::accept_ex( m_SocketID, addr, addrlen ) ;
 
 	__LEAVE_FUNCTION_FOXNET
 
@@ -211,7 +211,7 @@ BOOL Socket::setLinger (UINT lingertime)
 	ling.l_onoff = lingertime > 0 ? 1 : 0;
 	ling.l_linger = lingertime;
 	
-	return SocketAPI::setsockopt_ex( m_SocketID , SOL_SOCKET , SO_LINGER , &ling , sizeof(ling) );
+	return select_socket_api::setsockopt_ex( m_SocketID , SOL_SOCKET , SO_LINGER , &ling , sizeof(ling) );
 
 	__LEAVE_FUNCTION_FOXNET
 
@@ -233,7 +233,7 @@ BOOL Socket::isNonBlocking ()const
 { 
 	__ENTER_FUNCTION_FOXNET
 
-	return SocketAPI::getsocketnonblocking_ex( m_SocketID );
+	return select_socket_api::getsocketnonblocking_ex( m_SocketID );
 
 	__LEAVE_FUNCTION_FOXNET
 
@@ -244,7 +244,7 @@ BOOL Socket::setNonBlocking (BOOL on )
 { 
 	__ENTER_FUNCTION_FOXNET
 
-	return SocketAPI::setsocketnonblocking_ex( m_SocketID , on );
+	return select_socket_api::setsocketnonblocking_ex( m_SocketID , on );
 
 	__LEAVE_FUNCTION_FOXNET
 
@@ -258,7 +258,7 @@ UINT Socket::getReceiveBufferSize ()const
 	UINT ReceiveBufferSize;
 	UINT size = sizeof(ReceiveBufferSize);
 
-	SocketAPI::getsockopt_ex( m_SocketID , SOL_SOCKET , SO_RCVBUF , &ReceiveBufferSize, &size );
+	select_socket_api::getsockopt_ex( m_SocketID , SOL_SOCKET , SO_RCVBUF , &ReceiveBufferSize, &size );
 	
 	return ReceiveBufferSize;
 
@@ -271,7 +271,7 @@ BOOL Socket::setReceiveBufferSize (UINT size)
 { 
 	__ENTER_FUNCTION_FOXNET
 
-	return (BOOL)(SocketAPI::setsockopt_ex( m_SocketID , SOL_SOCKET , SO_RCVBUF , &size, sizeof(UINT) ) ) ;
+	return (BOOL)(select_socket_api::setsockopt_ex( m_SocketID , SOL_SOCKET , SO_RCVBUF , &size, sizeof(UINT) ) ) ;
 
 	__LEAVE_FUNCTION_FOXNET
 
@@ -285,7 +285,7 @@ UINT Socket::getSendBufferSize ()const
 	UINT SendBufferSize;
 	UINT size = sizeof(SendBufferSize);
 
-	SocketAPI::getsockopt_ex( m_SocketID , SOL_SOCKET , SO_SNDBUF , &SendBufferSize, &size );
+	select_socket_api::getsockopt_ex( m_SocketID , SOL_SOCKET , SO_SNDBUF , &SendBufferSize, &size );
 	
 	return SendBufferSize;
 
@@ -298,7 +298,7 @@ BOOL Socket::setSendBufferSize (UINT size)
 { 
 	__ENTER_FUNCTION_FOXNET
 
-	return (BOOL)(SocketAPI::setsockopt_ex( m_SocketID , SOL_SOCKET , SO_SNDBUF , &size, sizeof(UINT) ) );
+	return (BOOL)(select_socket_api::setsockopt_ex( m_SocketID , SOL_SOCKET , SO_SNDBUF , &size, sizeof(UINT) ) );
 
 	__LEAVE_FUNCTION_FOXNET
 
@@ -348,7 +348,7 @@ BOOL Socket::isSockError()const
 	INT error;
 	UINT len = sizeof(error);
 	
-	INT Result = SocketAPI::getsockopt_ex2( m_SocketID , SOL_SOCKET , SO_ERROR , &error, &len );
+	INT Result = select_socket_api::getsockopt_ex2( m_SocketID , SOL_SOCKET , SO_ERROR , &error, &len );
 
 	if( Result == 0 ) 
 		return FALSE;
@@ -367,7 +367,7 @@ BOOL Socket::bind( )
 	m_SockAddr.sin_addr.s_addr = htonl(INADDR_ANY);
     m_SockAddr.sin_port        = htons(m_Port);
 
-	BOOL result = SocketAPI::bind_ex( m_SocketID , (const struct sockaddr *)&m_SockAddr , sizeof(m_SockAddr) ) ;
+	BOOL result = select_socket_api::bind_ex( m_SocketID , (const struct sockaddr *)&m_SockAddr , sizeof(m_SockAddr) ) ;
 	if( result )
 		return TRUE ;
 	else
@@ -387,7 +387,7 @@ BOOL Socket::bind( UINT port )
 	m_SockAddr.sin_addr.s_addr = htonl(INADDR_ANY);
     m_SockAddr.sin_port        = htons(m_Port);
 
-	BOOL result = SocketAPI::bind_ex( m_SocketID , (const struct sockaddr *)&m_SockAddr , sizeof(m_SockAddr) );
+	BOOL result = select_socket_api::bind_ex( m_SocketID , (const struct sockaddr *)&m_SockAddr , sizeof(m_SockAddr) );
 	if( result )
 		return TRUE ;
 	else
@@ -402,7 +402,7 @@ BOOL Socket::listen( INT backlog )
 {
 	__ENTER_FUNCTION_FOXNET
 		
-	return SocketAPI::listen_ex( m_SocketID , backlog );
+	return select_socket_api::listen_ex( m_SocketID , backlog );
 
 	__LEAVE_FUNCTION_FOXNET
 
@@ -416,7 +416,7 @@ BOOL Socket::isReuseAddr ()const
 	INT reuse;
 	UINT len = sizeof(reuse);
 	
-	SocketAPI::getsockopt_ex( m_SocketID , SOL_SOCKET , SO_REUSEADDR , &reuse , &len );
+	select_socket_api::getsockopt_ex( m_SocketID , SOL_SOCKET , SO_REUSEADDR , &reuse , &len );
 	
 	return reuse == 1;
 	
@@ -431,7 +431,7 @@ BOOL Socket::setReuseAddr ( BOOL on )
 
 	INT opt = on == TRUE ? 1 : 0;
 	
-	return SocketAPI::setsockopt_ex( m_SocketID , SOL_SOCKET , SO_REUSEADDR , &opt , sizeof(opt) );
+	return select_socket_api::setsockopt_ex( m_SocketID , SOL_SOCKET , SO_REUSEADDR , &opt , sizeof(opt) );
 	
 	__LEAVE_FUNCTION_FOXNET
 

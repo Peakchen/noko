@@ -41,7 +41,7 @@ public :
 	VOID close () ;
 	
 	// accept new connection
-	BOOL accept ( Socket* socket ) ;
+	BOOL accept (select_session* socket ) ;
 
 	// get/set socket's linger status
     UINT getLinger () { return m_Socket->getLinger(); }
@@ -59,7 +59,7 @@ public :
     UINT getSendBufferSize () const { return m_Socket->getSendBufferSize(); }
     VOID setSendBufferSize (UINT size) { m_Socket->setSendBufferSize(size); }
  
-	SOCKET getSOCKET () { return m_Socket->getSOCKET(); }
+	SOCKET m_sockaddr () { return m_Socket->m_sockaddr(); }
 
 //////////////////////////////////////////////////
 // attributes

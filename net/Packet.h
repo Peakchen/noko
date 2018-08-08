@@ -54,7 +54,7 @@ public :
 	//PACKET_EXE_NOTREMOVE 表示继续在当前循环里执行剩下的消息,但是不回收当前消息
 	virtual UINT		Execute( Player* pPlayer ) = 0 ;
 	
-	virtual	PacketID_t	GetPacketID( ) const = 0 ;
+	virtual	UINT	GetPacketID( ) const = 0 ;
 	
 	virtual	UINT		GetPacketSize( ) const = 0 ;
 

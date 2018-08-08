@@ -32,19 +32,39 @@ using namespace __gnu_cxx;
 #include <functional>
 #endif
 
-#ifdef _WIN32
+#ifdef __WINDOWS__
+#pragma warning ( disable : 4786 )
 #include <winsock2.h>
 #include <windows.h>
 #include <mbctype.h>
-#include <winsock2.h>
 #include <stdio.h>   
 #include <stdlib.h>   
 #include <httpext.h>   
 #include <windef.h>   
 #include <Nb30.h>
 #include <Winbase.h>
+#include "crtdbg.h"
 #pragma comment(lib,"ws2_32.lib")
 #pragma comment(lib,"netapi32.lib")
+#elif defined(__LINUX__)
+#include <netinet/in.h>
+#include <arpa/inet.h>
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <fcntl.h>
+#include <sys/types.h>
+#include <pthread.h>
+#include <execinfo.h>
+#include <signal.h>
+#include <exception>
+#include <setjmp.h>
+#include <sys/epoll.h>
+#include <sys/types.h>			// for accept()
+#include <sys/socket.h>
+#include <sys/time.h>
+#include <arpa/inet.h>			// for inet_xxx()
+#include <netinet/in.h>
+#include <errno.h>				// for errno
 #else
 #include <netinet/in.h>
 #endif
@@ -80,6 +100,8 @@ typedef unsigned long long	uint64;
 typedef char*				p_str;
 typedef const char*			pc_str;
 typedef unsigned char		byte;
+typedef SOCKET				nk_socket;
+typedef uint32				IP_t;
 // typedef unsigned char		BYTE;
 // typedef unsigned short		WORD;
 // typedef unsigned long		DWORD;
@@ -158,13 +180,133 @@ static const uint32	uint32_MAX = uint32(0xffffffff);						///< Constant Max Limi
 #define LU8(w)			((BYTE)((DWORD)(w) & 0xff))
 #define HU8(w)			((BYTE)((DWORD)(w) >> 8))
 
+///////////////////////////////////////////////////////////////////////
+//基本数据宏定义
+///////////////////////////////////////////////////////////////////////
+
+//IP地址的字符最大长度
+#define IP_SIZE				24
+#define KEY_SIZE			64
+#define MAX_WORLDCOUNT		256
+#define TIMELENTH			23
+
+																			//↓这样在可执行文件中将是汉字显示，上线前要改成随机KEY↓KEY不得小于10个字节
+#define GAMESERVER_TO_CLIENT_KEY "服务器端对客户端的封包密钥"
+#define CLIENT_TO_GAMESERVER_KEY "服务器端对客户端的封包密钥"
+#define LOGIN_TO_CLIENT_KEY      "服务器端对客户端的封包密钥"
+#define CLIENT_TO_LOGIN_KEY      "服务器端对客户端的封包密钥"
+#define OSTREAM_KEY              "底层全局封包流通用密钥"		
+																			//↑这样在可执行文件中将是汉字显示，上线前要改成随机KEY↑KEY不得小于10个字节
+
+#define PACK_COMPART "$-$"//封包分隔符
+#define PACK_COMPART_SIZE strlen(PACK_COMPART)
+
+#ifndef ENCRYPT
+#define ENCRYPT(x,xlen,KEY,BeginPlace)	if( (x)!=NULL ) \
+		{ \
+		\
+			CHAR* t_pBuffer = (x); \
+			CHAR* pKey = {KEY}; \
+			UINT KeyLen = (UINT)strlen(pKey); \
+			for (UINT i = 0; i < (xlen); i++) \
+			{ \
+				*t_pBuffer ^= pKey[(i+BeginPlace)%KeyLen]; \
+				t_pBuffer++; \
+			} \
+		}
+#endif
+
+#ifndef ENCRYPT_HEAD
+#define ENCRYPT_HEAD(x,KEY)	if( (x)!=NULL ) \
+		{ \
+			CHAR* t_pBuffer = (x); \
+			CHAR* pKey = {KEY}; \
+			UINT KeyLen = (UINT)strlen(pKey); \
+			for (UINT i = 0; i < PACKET_HEADER_SIZE; i++) \
+			{ \
+				*t_pBuffer ^= pKey[i%KeyLen]; \
+				t_pBuffer++; \
+			} \
+		}
+#endif
+
+#define OVER_MAX_SERVER 256
+
+																			//无效的句柄
+#define INVALID_HANDLE	-1
+																			//无效的ID值
+#define INVALID_ID		-1
+																			//真
+#ifndef TRUE
+#define TRUE 1
+#endif
+																			//假
+#ifndef FALSE
+#define FALSE 0
+#endif
+																			//文件路径的字符最大长度
+#ifndef _MAX_PATH
+#define _MAX_PATH 260
+#endif
+
+///////////////////////////////////////////////////////////////////////
+//调试预定义宏定义
+///////////////////////////////////////////////////////////////////////
+#if defined(NDEBUG)
+#define __ENTER_FUNCTION_FOXNET if(1){
+#define __LEAVE_FUNCTION_FOXNET }
+#else
+#define __ENTER_FUNCTION_FOXNET if(1){
+#define __LEAVE_FUNCTION_FOXNET }
+#endif
+
+
+#if defined(NDEBUG)
+#define _MY_TRY try
+#define _MY_CATCH catch(...)
+#else
+#define _MY_TRY try
+#define _MY_CATCH catch(...)
+#endif
+																			//根据指针值删除内存
+#ifndef SAFE_DELETE
+#define SAFE_DELETE(x)	if( (x)!=NULL ) { delete (x); (x)=NULL; }
+#endif
+																			//根据指针值删除数组类型内存
+#ifndef SAFE_DELETE_ARRAY
+#define SAFE_DELETE_ARRAY(x)	if( (x)!=NULL ) { delete[] (x); (x)=NULL; }
+#endif
+																			//根据指针调用free接口
+#ifndef SAFE_FREE
+#define SAFE_FREE(x)	if( (x)!=NULL ) { free(x); (x)=NULL; }
+#endif
+																			//根据指针调用Release接口
+#ifndef SAFE_RELEASE
+#define SAFE_RELEASE(x)	if( (x)!=NULL ) { (x)->Release(); (x)=NULL; }
+#endif
+
+
 #define MAX_PATH 260
 
 #ifdef _WIN32
-#include <windows.h>
 #include <TlHelp32.h>
 #include <WinBase.h>
 #include <ctime>
 #endif
+
+#define _ESIZE 256
+#if defined(__LINUX__)
+
+typedef		int32		SOCKET;
+#define     INVALID_SOCKET   -1
+#define		SOCKET_ERROR	 -1
+
+#endif
+
+static const int32 SOCKET_ERROR_WOULDBLOCK = -100;
+
+typedef struct sockaddr SOCKADDR;
+typedef struct sockaddr_in SOCKADDR_IN;
+static const uint32 szSOCKADDR_IN = sizeof(SOCKADDR_IN);
 
 #endif // __CommonDef_h__

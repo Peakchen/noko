@@ -1,0 +1,108 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="common">
+      <UniqueIdentifier>{572d311e-02c3-4441-ac7c-9f1c792788ab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="net">
+      <UniqueIdentifier>{c1e4849a-3a7d-499d-8371-e9fd4f618cef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="message">
+      <UniqueIdentifier>{f4d91407-34b4-4f84-be72-6c823a8ce75a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="net\session">
+      <UniqueIdentifier>{21d83808-ef24-46e5-b015-cda8c9f78353}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="net\select">
+      <UniqueIdentifier>{df59e24e-de54-4fab-9044-e630fead7e00}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="stdafx.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\CommonDef.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Function.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\TimerHelper.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\net\session\session.h">
+      <Filter>net\session</Filter>
+    </ClInclude>
+    <ClInclude Include="..\net\session\SessionManager.h">
+      <Filter>net\session</Filter>
+    </ClInclude>
+    <ClInclude Include="..\message\message.h">
+      <Filter>message</Filter>
+    </ClInclude>
+    <ClInclude Include="..\message\message_translate.h">
+      <Filter>message</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Singleton.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\net\select_socket_api.h">
+      <Filter>net\select</Filter>
+    </ClInclude>
+    <ClInclude Include="..\net\Netdefine.h">
+      <Filter>net</Filter>
+    </ClInclude>
+    <ClInclude Include="..\net\nk_file_api.h">
+      <Filter>net</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\include\Function.cpp">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\include\TimerHelper.cpp">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\net\session\session.cpp">
+      <Filter>net\session</Filter>
+    </ClCompile>
+    <ClCompile Include="..\net\session\SessionManager.cpp">
+      <Filter>net\session</Filter>
+    </ClCompile>
+    <ClCompile Include="..\message\message.cpp">
+      <Filter>message</Filter>
+    </ClCompile>
+    <ClCompile Include="..\message\message_translate.cpp">
+      <Filter>message</Filter>
+    </ClCompile>
+    <ClCompile Include="..\net\select_socket_api.cpp">
+      <Filter>net\select</Filter>
+    </ClCompile>
+    <ClCompile Include="..\net\nk_file_api.cpp">
+      <Filter>net</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

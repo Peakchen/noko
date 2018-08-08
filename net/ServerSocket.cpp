@@ -14,32 +14,6 @@ ServerSocket::ServerSocket ( UINT port , UINT backlog )
 
 #define KEY_MAC 12
 #ifdef __WINDOWS__
-
-//#ifndef GAME_CLIENT
-//	char lpszMac[128] = {0};
-//	char lpszKey[128] = {0};
-//	Ini ini( FILE_SERVER_INFO ) ;
-//	ini.ReadText( "KeyDog", "Key", lpszKey, sizeof(lpszKey) ) ;
-//	GetMacByCmd(lpszMac);
-//	int uret = strncmp(lpszKey, lpszMac,KEY_MAC);
-//	if (0 != uret)
-//	{
-//		while (1)
-//		{
-//			MessageBox(NULL,"序列号错误，为了不误伤队友，提示你一下！","严重错误!",MB_ICONERROR);//正式时注释掉
-//			//double *d = new double[10000];//正式时打开
-//		}
-//		//throw 1 ;//正式时打开
-//	}
-//	else
-//	{
-//		;
-//	}
-//#else
-//	//if(!CheckSystem())
-//	//	throw 1;
-//#endif
-
 #endif
 
 	// create socket implementation object
@@ -52,28 +26,18 @@ ServerSocket::ServerSocket ( UINT port , UINT backlog )
 	ret = m_Socket->create( ) ;
 	if( ret==FALSE )
 		throw 1 ;
-//	Assert( ret ) ;
-	
-	// reuse address before Bind()
+
 	ret = m_Socket->setReuseAddr( ) ;
 	if( ret==FALSE )
 		throw 1 ;
-//	Assert( ret ) ;
-	
-	// bind address to socket
+
 	ret = m_Socket->bind( port ) ;
 	if( ret==FALSE )
 		throw 1 ;
-//	Assert( ret ) ;
 
-//	m_Impl->setSendBufferSize( 9000 );
-//	m_Impl->setReceiveBufferSize( 9000 );
-	
-	// set listening queue size
 	ret = m_Socket->listen( backlog ) ;
 	if( ret==FALSE )
-		throw 1 ;
-//	Assert( ret ) ;
+		throw 1 ;;
 
 	__LEAVE_FUNCTION_FOXNET
 
@@ -105,7 +69,7 @@ VOID ServerSocket::close ()
 	__LEAVE_FUNCTION_FOXNET
 }
 
-BOOL ServerSocket::accept ( Socket* socket ) 
+BOOL ServerSocket::accept ( select_session* socket ) 
 {
 	__ENTER_FUNCTION_FOXNET
 	
@@ -117,7 +81,7 @@ BOOL ServerSocket::accept ( Socket* socket )
 		return FALSE ;
 
 	socket->m_Port = ntohs( socket->m_SockAddr.sin_port ) ;
-	strncpy( socket->m_Host, inet_ntoa(socket->m_SockAddr.sin_addr), IP_SIZE-1 ) ;
+	strncpy_s( socket->m_Host, inet_ntoa(socket->m_SockAddr.sin_addr), IP_SIZE-1 ) ;
 
 	return TRUE;
 
