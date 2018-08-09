@@ -13,8 +13,11 @@
 #define __SESSION__H__
 #pragma once
 
-#include "select_socket_api.h"
+#include "select/select_socket_api.h"
 #include <ws2ipdef.h>
+#include "Netdefine.h"
+#include "TimerHelper.h"
+#include "Function.h"
 
 namespace noko {
 
@@ -24,7 +27,8 @@ namespace noko {
 			select_session();
 			virtual ~select_session();
 
-			void create(const char* szhost, uint32 port);
+			void init(const char* szhost, uint32 port);
+			void create();
 			// close connection
 			void close();
 			// try connect to remote host
@@ -41,13 +45,16 @@ namespace noko {
 
 			uint32 available() const;
 
-			nk_socket accept(struct sockaddr* addr, uint32* addrlen);
+			bool accept(struct sockaddr* addr, uint32 addrlen) {}
+			bool accept();
 
 			bool bind();
 
 			bool bind(uint32 port);
 
-			bool listen(int32 backlog);
+			bool listen(int32 backlog = SOCKET_LISTEN_BASE_BLOCK_SIZE);
+
+			bool startselect();
 
 			// get/set socket's linger status
 			uint32 getLinger()const;
@@ -57,7 +64,7 @@ namespace noko {
 			bool setReuseAddr(bool reuse = true);
 
 			// get is Error
-			uint32 getSockError()const;
+			uint32 getSockError(int32 socketindex)const;
 
 			// get/set socket's nonblocking status
 			bool isNonBlocking()const;
@@ -75,16 +82,17 @@ namespace noko {
 			IP_t getHostIP()const;
 
 			// check if socket is valid
-			bool isValid()const;
+			bool isValid(int32 socketindex)const;
 
 			// get socket descriptor
-			nk_socket getsocket()const;
+			nk_socket getsocket(int32 socketindx)const;
 
-			bool isSockError()const;
+			bool isSockError(int32 socketindx)const;
 
-		private:
+			uint64 getsessionTick();
+		public:
 
-			nk_socket m_socketid;
+			nk_socket m_socketid[SELECT_SOCKET_NUM];
 			// socket address structure
 			sockaddr_in6 m_sockaddrSix;  // ipv6 todo: ... left
 			sockaddr_in  m_sockaddr;
@@ -94,6 +102,13 @@ namespace noko {
 			uint16 m_unPort;
 
 			bool m_bIPv6;
+
+			fd_set m_fdreads;
+			fd_set m_fdwrites;
+			fd_set m_fderrors;
+
+			int32  m_maxfd;
+			uint64 m_ucreatetime;
 	};
 }
 

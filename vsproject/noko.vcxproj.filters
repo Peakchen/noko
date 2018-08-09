@@ -51,9 +51,6 @@
     <ClInclude Include="..\net\session\session.h">
       <Filter>net\session</Filter>
     </ClInclude>
-    <ClInclude Include="..\net\session\SessionManager.h">
-      <Filter>net\session</Filter>
-    </ClInclude>
     <ClInclude Include="..\message\message.h">
       <Filter>message</Filter>
     </ClInclude>
@@ -63,14 +60,23 @@
     <ClInclude Include="..\include\Singleton.h">
       <Filter>common</Filter>
     </ClInclude>
-    <ClInclude Include="..\net\select_socket_api.h">
-      <Filter>net\select</Filter>
-    </ClInclude>
     <ClInclude Include="..\net\Netdefine.h">
       <Filter>net</Filter>
     </ClInclude>
     <ClInclude Include="..\net\nk_file_api.h">
       <Filter>net</Filter>
+    </ClInclude>
+    <ClInclude Include="..\net\select\select_socket_api.h">
+      <Filter>net\select</Filter>
+    </ClInclude>
+    <ClInclude Include="..\net\select\select_tcp_server.h">
+      <Filter>net\select</Filter>
+    </ClInclude>
+    <ClInclude Include="..\net\session\session_manager.h">
+      <Filter>net\session</Filter>
+    </ClInclude>
+    <ClInclude Include="..\net\session\session_define.h">
+      <Filter>net\session</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -89,20 +95,23 @@
     <ClCompile Include="..\net\session\session.cpp">
       <Filter>net\session</Filter>
     </ClCompile>
-    <ClCompile Include="..\net\session\SessionManager.cpp">
-      <Filter>net\session</Filter>
-    </ClCompile>
     <ClCompile Include="..\message\message.cpp">
       <Filter>message</Filter>
     </ClCompile>
     <ClCompile Include="..\message\message_translate.cpp">
       <Filter>message</Filter>
     </ClCompile>
-    <ClCompile Include="..\net\select_socket_api.cpp">
-      <Filter>net\select</Filter>
-    </ClCompile>
     <ClCompile Include="..\net\nk_file_api.cpp">
       <Filter>net</Filter>
+    </ClCompile>
+    <ClCompile Include="..\net\select\select_socket_api.cpp">
+      <Filter>net\select</Filter>
+    </ClCompile>
+    <ClCompile Include="..\net\select\select_tcp_server.cpp">
+      <Filter>net\select</Filter>
+    </ClCompile>
+    <ClCompile Include="..\net\session\session_manager.cpp">
+      <Filter>net\session</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

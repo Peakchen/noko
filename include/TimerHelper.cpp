@@ -10,7 +10,7 @@ static uint32	g_uTickCount		= 0;
 static uint64	g_uTickCount64		= 0;
 static uint64	g_uSystemTime		= 0;
 
-namespace API
+namespace noko
 {
 
 	//获得系统启动毫秒

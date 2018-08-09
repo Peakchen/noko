@@ -304,9 +304,10 @@ typedef		int32		SOCKET;
 #endif
 
 static const int32 SOCKET_ERROR_WOULDBLOCK = -100;
-
 typedef struct sockaddr SOCKADDR;
 typedef struct sockaddr_in SOCKADDR_IN;
 static const uint32 szSOCKADDR_IN = sizeof(SOCKADDR_IN);
+
+#define  SOCKET_LISTEN_BASE_BLOCK_SIZE 5
 
 #endif // __CommonDef_h__

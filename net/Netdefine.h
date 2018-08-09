@@ -22,4 +22,13 @@ enum emBufferSize
 	em_buffer_4096 = 4096,
 };
 
+/************************************************************************/
+/* select socket define                                                 */
+/************************************************************************/
+
+#define SELECT_SOCKET_NUM 2
+#define SELECT_TV_SEC 5
+#define SELECT_TV_USEC 0
+#define SELECT_TIME_COUT_TICK 10
+
 #endif

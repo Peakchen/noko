@@ -5,7 +5,7 @@
 #include <algorithm>
 #include <utility>
 
-namespace API
+namespace noko
 {
 
 	std::string UnSerializeFromString(const std::map<int, std::string> & map, char seperator)
@@ -33,7 +33,7 @@ namespace API
 
 	std::string UnSerializeFromString(const std::map<int, std::string> & map)
 	{
-		return std::move(API::UnSerializeFromString(map, '='));
+		return std::move(UnSerializeFromString(map, '='));
 	}
 
 	void GetReplaceString(std::string& dstStr, std::string szSrc, std::string szNeed)

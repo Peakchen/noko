@@ -23,7 +23,7 @@
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>noko</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
-    <ProjectName>GateWay</ProjectName>
+    <ProjectName>gateway</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -162,9 +162,11 @@
     <ClInclude Include="..\message\message_translate.h" />
     <ClInclude Include="..\net\nk_file_api.h" />
     <ClInclude Include="..\net\Netdefine.h" />
+    <ClInclude Include="..\net\select\select_socket_api.h" />
+    <ClInclude Include="..\net\select\select_tcp_server.h" />
     <ClInclude Include="..\net\session\session.h" />
-    <ClInclude Include="..\net\session\SessionManager.h" />
-    <ClInclude Include="..\net\select_socket_api.h" />
+    <ClInclude Include="..\net\session\session_define.h" />
+    <ClInclude Include="..\net\session\session_manager.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
@@ -174,9 +176,10 @@
     <ClCompile Include="..\message\message.cpp" />
     <ClCompile Include="..\message\message_translate.cpp" />
     <ClCompile Include="..\net\nk_file_api.cpp" />
+    <ClCompile Include="..\net\select\select_socket_api.cpp" />
+    <ClCompile Include="..\net\select\select_tcp_server.cpp" />
     <ClCompile Include="..\net\session\session.cpp" />
-    <ClCompile Include="..\net\session\SessionManager.cpp" />
-    <ClCompile Include="..\net\select_socket_api.cpp" />
+    <ClCompile Include="..\net\session\session_manager.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="stdafx.cpp" />
   </ItemGroup>

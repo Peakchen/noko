@@ -5,7 +5,7 @@
 #include "CommonDef.h"
 
 
-namespace API
+namespace noko
 {
 	template <typename T>
 	T StringToNumber(const std::string &Text)
