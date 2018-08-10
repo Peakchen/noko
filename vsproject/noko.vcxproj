@@ -156,8 +156,11 @@
   <ItemGroup>
     <ClInclude Include="..\include\CommonDef.h" />
     <ClInclude Include="..\include\Function.h" />
+    <ClInclude Include="..\include\md5\md5.h" />
     <ClInclude Include="..\include\Singleton.h" />
     <ClInclude Include="..\include\TimerHelper.h" />
+    <ClInclude Include="..\include\utls.h" />
+    <ClInclude Include="..\include\utlsImpl.h" />
     <ClInclude Include="..\message\message.h" />
     <ClInclude Include="..\message\message_translate.h" />
     <ClInclude Include="..\net\nk_file_api.h" />
@@ -172,7 +175,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\include\Function.cpp" />
+    <ClCompile Include="..\include\md5\md5.cpp" />
     <ClCompile Include="..\include\TimerHelper.cpp" />
+    <ClCompile Include="..\include\utls.cpp" />
     <ClCompile Include="..\message\message.cpp" />
     <ClCompile Include="..\message\message_translate.cpp" />
     <ClCompile Include="..\net\nk_file_api.cpp" />

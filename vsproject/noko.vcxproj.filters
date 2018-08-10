@@ -28,6 +28,9 @@
     <Filter Include="net\select">
       <UniqueIdentifier>{df59e24e-de54-4fab-9044-e630fead7e00}</UniqueIdentifier>
     </Filter>
+    <Filter Include="common\md5">
+      <UniqueIdentifier>{6c40cd77-9489-4240-9ae7-47c3e46b433b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -78,6 +81,15 @@
     <ClInclude Include="..\net\session\session_define.h">
       <Filter>net\session</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\utls.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\utlsImpl.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\md5\md5.h">
+      <Filter>common\md5</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -112,6 +124,12 @@
     </ClCompile>
     <ClCompile Include="..\net\session\session_manager.cpp">
       <Filter>net\session</Filter>
+    </ClCompile>
+    <ClCompile Include="..\include\utls.cpp">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\include\md5\md5.cpp">
+      <Filter>common\md5</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
