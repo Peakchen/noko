@@ -42,8 +42,10 @@ namespace noko {
 		bool   startNewconnect(uint32 nsessionid, bool isReuse = false);
 		bool   closeConnect(uint32 nsessionid);
 		bool   dispatchmessage(uint32 nsessionid, void* pbuff, uint32 nsize);
-		bool   startrun(uint32 nsessionid);
+		bool   startrun(uint32 nsessionid, cb_dispatchmessage ssp);
 		bool   checktimeout();
+
+		std::unordered_map<uint32, SessionPtr>& getSessionDic();
 
 	private:
 		uint32 autoAddSessionid();

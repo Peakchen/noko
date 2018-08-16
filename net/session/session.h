@@ -25,6 +25,7 @@
 #include "Netdefine.h"
 #include "TimerHelper.h"
 #include "Function.h"
+#include "session_define.h"
 
 namespace noko {
 
@@ -48,7 +49,7 @@ namespace noko {
 			uint32 send(const void* buf, uint32 len, uint32 flags = 0);
 
 			// receive data from peer
-			uint32 receive(void* buf, uint32 len, uint32 flags = 0);
+			int32 receive(void* buf, uint32 len, uint32 flags = 0);
 
 			uint32 available() const;
 
@@ -61,7 +62,7 @@ namespace noko {
 
 			bool listen(int32 backlog = SOCKET_LISTEN_BASE_BLOCK_SIZE);
 
-			bool startselect();
+			bool startselect(cb_dispatchmessage ssp);
 
 			// get/set socket's linger status
 			uint32 getLinger()const;

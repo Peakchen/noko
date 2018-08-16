@@ -18,7 +18,7 @@
 #define __SOCKET_API_H__
 
 #include "CommonDef.h"
-#include "nk_file_api.h"
+#include "nk_socket_ex.h"
 
 namespace noko{
 	namespace select_socket_api 
@@ -37,7 +37,7 @@ namespace noko{
 		uint32 send_ex (nk_socket s, const void* buf, uint32 len, uint32 flags) ;
 		uint32 sendto_ex (nk_socket s, const void* buf, int32 len, uint32 flags, const struct sockaddr* to, int32 tolen) ;
 		
-		uint32 recv_ex (nk_socket s, void* buf, uint32 len, uint32 flags) ;
+		int32 recv_ex (nk_socket s, void* buf, uint32 len, uint32 flags = 0) ;
 		uint32 recvfrom_ex (nk_socket s, void* buf, int32 len, uint32 flags, struct sockaddr* from, uint32* fromlen) ;
 		
 		bool closesocket_ex (nk_socket s) ;

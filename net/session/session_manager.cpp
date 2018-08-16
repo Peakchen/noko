@@ -65,7 +65,7 @@ namespace noko
 		return true;
 	}
 
-	bool SessionManager::startrun(uint32 nsessionid)
+	bool SessionManager::startrun(uint32 nsessionid, cb_dispatchmessage ssp)
 	{
 		if (!hasSession(nsessionid))
 		{
@@ -73,7 +73,7 @@ namespace noko
 		}
 
 		SessionPtr session = m_mapsession[nsessionid];
-		return session.get()->startselect();
+		return session.get()->startselect(ssp);
 	}
 
 	bool SessionManager::checktimeout()
@@ -88,6 +88,11 @@ namespace noko
 		}
 
 		return true;
+	}
+
+	std::unordered_map<uint32, SessionPtr>& SessionManager::getSessionDic()
+	{
+		return m_mapsession;
 	}
 
 	bool SessionManager::hasSession(uint32 nsessionid)

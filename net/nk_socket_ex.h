@@ -16,13 +16,13 @@
 */
 
 
-#ifndef __NK_FILE_API_H__
-#define __NK_FILE_API_H__
+#ifndef __nk_socket_ex_H__
+#define __nk_socket_ex_H__
 
 #include "CommonDef.h"
 
 namespace noko{
-	namespace nk_file_api 
+	namespace nk_socket_ex 
 	{
 		//
 		// exception version of open ()
@@ -103,7 +103,7 @@ namespace noko{
 		LONG tell_ex( int32 fd ) ;
 
 
-	};//end of namespace nk_file_api
+	};//end of namespace nk_socket_ex
 };//end of namespace noko
 
 #endif

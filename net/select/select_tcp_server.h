@@ -26,20 +26,15 @@
 namespace noko {
 
 
-	class select_tcp_server
+	namespace select_tcp_server
 	{
-
-	public:
-		select_tcp_server();
-		~select_tcp_server();
-
 
 		bool	start(const char* szip, const uint16 port);
 		
-		bool	recv();
+		bool	dispatchmessage(const void* outbuff, size_t nlength);
 
 		bool    disconnect();
-	};
+	}
 
 }
 

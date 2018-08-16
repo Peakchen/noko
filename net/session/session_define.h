@@ -29,7 +29,9 @@ namespace noko {
 	//connect callback
 	typedef std::function<bool()> cb_connect;
 	typedef std::function<bool()> cb_close;
-	typedef std::function<bool(uint32, byte*)> cb_dispatchmessage;
+	typedef std::function<bool(const void*, size_t)> cb_dispatchmessage;
+
+	class select_session;
 
 	struct TSession
 	{

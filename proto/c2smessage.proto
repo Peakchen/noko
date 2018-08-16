@@ -1,0 +1,181 @@
+syntax = "proto2";
+package Game;
+
+//游戏操作码
+enum GameMessage {
+    Req_Invalid = 0;
+
+	Req_Ping = 1000; // ping
+	Req_LoginWithToken = 1001; // 登录
+	
+	Req_RequestPutCoinOnTongue = 65;
+	Rsp_ResponsePutCoinOnTongue = 66;          
+	Rsp_SyncInitAdditional = 67;
+	Rsp_SyncPlayerRspore = 68;
+	Req_RequestAttackGameZoneMonster = 71;
+	Rsp_ResponseAttackGameZoneMonster = 72;
+	Req_RequestFallInSlot = 73;
+	Rsp_ResponseFallInSlot = 74;
+	Rsp_UpdateAdditional = 75;
+	Req_FallInSlotRewardReq = 77;
+	Rsp_FallInSlotRewardRsp = 78;
+	Rsp_NotifySuperMoneryRewardInfo = 79;
+	Req_SyncAdditionalCache = 80;	
+	Req_SuperMonreyTurnFinishReq = 81;
+	Rsp_SuperMonreyTurnFinishRsp = 82;
+	Rsp_NotifySuperMonreyRewardItem = 83;
+}
+
+enum ErrorCode {
+	LoadPropsDataFailed = 10001;	//加载玩家道具失败
+	CanNotFindPlayerPoint = 10002;	//找不到玩家对象,服务器有bug
+	ParameterIsWrong = 10003;		//参数错误
+	LackOfMoney = 10004;			//金币不足
+	FreeTimesChangeRatio = 10005;	//当前处于模式，不能修改倍率
+	IsNotSup = 10006;				//不是体验房	
+	DeserializeFailed = 10007;		//序列化错误
+	PlayerNotExist = 10008;			//玩家不存在
+	PlayerAlreadyLogin = 10009;		//玩家已经登录
+	LoadPlayerDataFailed = 10010;	//加载玩家数据失败
+	AllocTableFailed = 10011;		//系统分配错误
+	DefendPlugIn = 10012;			//反外挂中
+	QPEnterRoomFailed = 10013;		//加锁失败
+	QPBaseUserInfoGetFailed = 10014;//获取亲朋用户失败 
+	QPReadGoldFailed = 10015;		//读取金币失败
+	LackMoneyInServer = 10016;		//金币不足进入此服务器
+}
+
+
+// 登录
+message CSLoginWithToken {
+	required int64 PlayerId = 1;
+	required string Token = 2;
+}
+
+message SCLoginWithToken {
+	
+}
+
+///////////////////////////////////////////金币相关////////////////////////////////////////////////
+
+// 请求放置金币到舌头上，默认一次掉一个
+message CS_RequestPutCoinOnTongue
+{
+	
+}
+
+// 回复投掷金币结果
+message SC_ResponsePutCoinOnTongue
+{
+	required int32 userCoins = 1;			// 玩家金币数
+	required int32 stageCoins = 2;		    // 金币台金币数 
+	required int32 errorcode = 3;			// 错误码
+}
+
+// 同步玩家分值
+message SC_SyncPlayerScore				
+{
+	required int32 scores = 1;			// 玩家分值
+	required int32 type = 2;			// 类型，1：登录，2：充值
+}
+	
+// 请求掉入槽、金币桶、两侧 物品（金币、Combo币），默认一次掉一个
+message CS_RequestFallInSlot
+{
+	required int32 pos = 1;                     // 掉入金币槽位置， 1：中间， 2：两侧, 3: 金币桶(金币特有) 
+	required int32 type = 2;					// 类型：1：金币，2：Combo币
+}
+
+// 回复掉入槽金币数值
+message SC_ResponseFallInSlot
+{
+	required int32 errorcode = 1;			// 错误码
+}
+
+
+// 请求推入拉拔机槽内奖品
+message CS_FallInSlotRewardReq
+{
+	required string data = 1;			// 奖励字符串		
+	required int32  pos = 2;            // 掉入槽位置， 1：中间， 2：两侧	
+}
+
+// 回复掉入槽奖品
+message SC_FallInSlotRewardRsp
+{
+	required int32 errorcode = 1;			// 错误码
+	required string data = 2;				// 回复奖励字符串
+}
+
+
+///////////////////////////////////////////附加数据////////////////////////////////////////////
+// 附加数据请求
+message CS_SyncAdditionalCache
+{
+	
+}
+
+message SC_SyncInitAdditional
+{
+	required string Data = 1;			// 同步额外数据
+}
+
+message SC_UpdateAdditional				// 同步更新单个附加数据
+{
+	required int32 id = 1;				// 额外数据ID			:服务器用
+	required string Data = 2;			// 具体ID对应的内容     :服务器用
+}
+
+///////////////////////////////////副本杀怪/////////////////////////////////////
+
+message CS_RequestAttackGameZoneMonster		// 请求杀怪
+{
+	required int32 consumecoins = 1;		// 杀怪消耗金币数
+	required int32 scoreindex = 2;	    	// 怪物分值下标
+	required bool  bKillMonster = 3;		// 是否杀死怪物
+	required int32 monstertype = 4;         // 怪物类型, 1: 普通怪，2： Boss, ... 暂且两种，有其他再加
+	required int32 monsterid = 5;    		// 怪物ID
+}
+
+message SC_ResponseAttackGameZoneMonster	// 回复杀怪
+{
+	required int32 monsterid = 1;        //怪物ID
+	required bool  isboss = 2;			 // 是否爆出boss，需要杀死一定量小怪才能爆出
+	required int32 rewardcoins = 3;		 // 爆出奖励金币数
+}
+
+message AwardGoldPool
+{
+	required int32 sum_gold_value = 1;
+}
+
+//奖金池
+message AwardGoldPoolList
+{
+	repeated AwardGoldPool award_gold_pool_list = 1;
+}
+
+//////////////////////////////////拉拔机掉落奖励信息//////////////////////////////////
+message SC_NotifySuperMoneryRewardInfo
+{
+	required int32 index = 1;   // 中奖下表
+	required string data = 2;   // json数据
+}
+
+// 拉霸机转动结束请求
+message CS_SuperMonreyTurnFinishReq
+{
+	required int32 index = 1;		// 拉霸机中奖下标
+}
+
+// 回复
+message SC_SuperMonreyTurnFinishRsp
+{
+	required int32 errorcode = 1;
+}
+
+// 服务器抽中拉霸机中奖项，通知客户端
+message SC_NotifySuperMonreyRewardItem
+{
+	required int32 index = 1; 	   // 拉霸机中奖下标
+}

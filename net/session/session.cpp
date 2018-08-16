@@ -125,7 +125,7 @@ namespace noko {
 		return select_socket_api::send_ex(m_socketid[1], buf, len, flags);
 	}
 
-	uint32 select_session::receive(void* buf, uint32 len, uint32 flags)
+	int32 select_session::receive(void* buf, uint32 len, uint32 flags)
 	{
 		return select_socket_api::recv_ex(m_socketid[1], buf, len, flags);
 	}
@@ -293,7 +293,7 @@ namespace noko {
 		return select_socket_api::listen_ex(m_socketid[0], backlog);
 	}
 
-	bool select_session::startselect()
+	bool select_session::startselect(cb_dispatchmessage ssp)
 	{
 		for (;;)
 		{
@@ -309,16 +309,29 @@ namespace noko {
 			tv.tv_usec = SELECT_TV_USEC;
 
 			int32 result = select_socket_api::select_ex(m_maxfd + 1, &fdr, &fdw, &fde, &tv);
-			if (result == SOCKET_ERROR)
+			switch (result)
 			{
-				return false;
+				case SOCKET_ERROR:
+				case 0:
+					continue;
 			}
 
-			// time out then create reconnect.
-			if (result == 0)
+			if (FD_ISSET(m_socketid[1], &fdr))
 			{
-				close();
-				return false;
+				char outbuff[em_buffer_1024] = {0};
+				int32 revLen = receive(outbuff, sizeof(outbuff));
+				if (revLen == SOCKET_ERROR || revLen == 0)
+				{
+					continue;
+				}
+				else
+				{
+					//dispatch normal message package
+					if (ssp)
+					{
+						ssp(outbuff,sizeof(outbuff));
+					}
+				}
 			}
 		}
 

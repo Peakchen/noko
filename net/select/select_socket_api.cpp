@@ -718,7 +718,7 @@ namespace noko {
 			return nSent;
 		}
 
-		uint32 select_socket_api::recv_ex (nk_socket s , void * buf , uint32 len , uint32 flags )
+		int32 select_socket_api::recv_ex (nk_socket s , void * buf , uint32 len , uint32 flags )
 		{
 
 		#if __LINUX__
@@ -946,7 +946,7 @@ namespace noko {
 		{
 
 		#if __LINUX__
-				int32 flags = nk_file_api::fcntl_ex( s , F_GETFL , 0 );
+				int32 flags = nk_socket_ex::fcntl_ex( s , F_GETFL , 0 );
 
 			return flags | O_NONBLOCK;
 		#elif __WINDOWS__
@@ -958,7 +958,7 @@ namespace noko {
 		bool select_socket_api::setsocketnonblocking_ex(nk_socket s, bool on)
 		{
 #if __LINUX__
-			int32 flags = nk_file_api::fcntl_ex(s, F_GETFL, 0);
+			int32 flags = nk_socket_ex::fcntl_ex(s, F_GETFL, 0);
 
 			if (on)
 				// make nonblocking fd
@@ -967,7 +967,7 @@ namespace noko {
 				// make blocking fd
 				flags &= ~O_NONBLOCK;
 
-			nk_file_api::fcntl_ex(s, F_SETFL, flags);
+			nk_socket_ex::fcntl_ex(s, F_SETFL, flags);
 
 			return TRUE;
 #elif __WINDOWS__
@@ -983,7 +983,7 @@ namespace noko {
 		{
 
 #if __LINUX__
-			return nk_file_api::availablefile_ex(s);
+			return nk_socket_ex::availablefile_ex(s);
 #elif __WINDOWS__
 			ULONG argp = 0;
 			ioctlsocket_ex(s, FIONREAD, &argp);

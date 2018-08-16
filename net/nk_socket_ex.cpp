@@ -1,4 +1,4 @@
-#include "nk_file_api.h"
+#include "nk_socket_ex.h"
 
 
 #if __WINDOWS__
@@ -19,9 +19,9 @@ extern int32 errno;
 #endif
 
 namespace noko {
-	namespace nk_file_api
+	namespace nk_socket_ex
 	{
-		int32 nk_file_api::open_ex(const char * filename, int32 flags)
+		int32 nk_socket_ex::open_ex(const char * filename, int32 flags)
 		{
 
 #if __LINUX__
@@ -63,7 +63,7 @@ namespace noko {
 		}
 
 
-		int32 nk_file_api::open_ex(const char * filename, int32 flags, int32 mode)
+		int32 nk_socket_ex::open_ex(const char * filename, int32 flags, int32 mode)
 		{
 
 #if __LINUX__
@@ -104,7 +104,7 @@ namespace noko {
 			return fd;
 		}
 
-		uint32 nk_file_api::read_ex(int32 fd, void * buf, uint32 len)
+		uint32 nk_socket_ex::read_ex(int32 fd, void * buf, uint32 len)
 		{
 
 #if __LINUX__
@@ -141,7 +141,7 @@ namespace noko {
 		}
 
 
-		uint32 nk_file_api::write_ex(int32 fd, const void * buf, uint32 len)
+		uint32 nk_socket_ex::write_ex(int32 fd, const void * buf, uint32 len)
 		{
 
 #if __LINUX__
@@ -177,7 +177,7 @@ namespace noko {
 		}
 
 
-		void nk_file_api::close_ex(int32 fd)
+		void nk_socket_ex::close_ex(int32 fd)
 		{
 			if (close(fd) < 0) {
 #if __LINUX__
@@ -194,7 +194,7 @@ namespace noko {
 		}
 
 
-		int32 nk_file_api::fcntl_ex(int32 fd, int32 cmd)
+		int32 nk_socket_ex::fcntl_ex(int32 fd, int32 cmd)
 		{
 #if __LINUX__
 			int32 result = fcntl(fd, cmd);
@@ -220,7 +220,7 @@ namespace noko {
 		}
 
 
-		int32 nk_file_api::fcntl_ex(int32 fd, int32 cmd, LONG arg)
+		int32 nk_socket_ex::fcntl_ex(int32 fd, int32 cmd, LONG arg)
 		{
 
 #if __LINUX__
@@ -247,7 +247,7 @@ namespace noko {
 #endif
 		}
 
-		bool nk_file_api::getfilenonblocking_ex(int32 fd)
+		bool nk_socket_ex::getfilenonblocking_ex(int32 fd)
 		{
 
 #if __LINUX__
@@ -258,7 +258,7 @@ namespace noko {
 #endif
 		}
 
-		void nk_file_api::setfilenonblocking_ex(int32 fd, bool on)
+		void nk_socket_ex::setfilenonblocking_ex(int32 fd, bool on)
 		{
 #if __LINUX__
 			int32 flags = fcntl_ex(fd, F_GETFL, 0);
@@ -276,7 +276,7 @@ namespace noko {
 		}
 
 
-		void nk_file_api::ioctl_ex(int32 fd, int32 request, void * argp)
+		void nk_socket_ex::ioctl_ex(int32 fd, int32 request, void * argp)
 		{
 
 #if __LINUX__
@@ -296,7 +296,7 @@ namespace noko {
 		}
 
 
-		void nk_file_api::setfilenonblocking_ex2(int32 fd, bool on)
+		void nk_socket_ex::setfilenonblocking_ex2(int32 fd, bool on)
 		{
 
 #if __LINUX__
@@ -307,7 +307,7 @@ namespace noko {
 		}
 
 
-		uint32 nk_file_api::availablefile_ex(int32 fd)
+		uint32 nk_socket_ex::availablefile_ex(int32 fd)
 		{
 
 #if __LINUX__
@@ -320,7 +320,7 @@ namespace noko {
 		}
 
 
-		int32 nk_file_api::dup_ex(int32 fd)
+		int32 nk_socket_ex::dup_ex(int32 fd)
 		{
 
 #if __LINUX__
@@ -347,7 +347,7 @@ namespace noko {
 		}
 
 
-		LONG nk_file_api::lseek_ex(int32 fd, LONG offset, int32 whence)
+		LONG nk_socket_ex::lseek_ex(int32 fd, LONG offset, int32 whence)
 		{
 
 #if __LINUX__
@@ -372,7 +372,7 @@ namespace noko {
 			return result;
 		}
 
-		LONG nk_file_api::tell_ex(int32 fd)
+		LONG nk_socket_ex::tell_ex(int32 fd)
 		{
 
 #if __LINUX__
