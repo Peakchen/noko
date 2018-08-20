@@ -1,0 +1,19 @@
+package c2smessage
+
+enum c2s_message_id
+{
+	msg_invalid_id = 0;
+	msg_login = 1;
+	msg_thirdparty_login = 2;
+}
+
+message c2sbasemessage
+{
+	required int32 sid = 1;
+	required bytes data = 2;
+}
+
+message msg_thirdparty_login
+{
+	required int32 unionid = 1;
+}

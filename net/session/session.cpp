@@ -113,11 +113,6 @@ namespace noko {
 
 			m_socketid[i] = INVALID_SOCKET;
 		}
-		
-		memset(&m_sockaddr, 0, sizeof(sockaddr_in));
-		memset(m_szHost, 0, IP_SIZE);
-		m_unPort = 0;
-
 	}
 
 	uint32 select_session::send(const void* buf, uint32 len, uint32 flags)
@@ -155,6 +150,7 @@ namespace noko {
 
 #ifdef __WINDOWS__ || __LINUX__
 		m_ucreatetime = noko::GetTime();
+		return true;
 #endif
 	}
 

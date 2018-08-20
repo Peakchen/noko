@@ -49,6 +49,7 @@ namespace noko
 
 		SessionPtr session = m_mapsession[nsessionid];
 		session.get()->close();
+		m_mapsession.erase(nsessionid);
 		return true;
 	}
 

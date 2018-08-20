@@ -30,6 +30,7 @@ namespace noko {
 	typedef std::function<bool()> cb_connect;
 	typedef std::function<bool()> cb_close;
 	typedef std::function<bool(const void*, size_t)> cb_dispatchmessage;
+	typedef std::function<bool(const void*)> messageHandler;
 
 	class select_session;
 
@@ -50,6 +51,7 @@ namespace noko {
 	};
 
 	using SessionPtr = std::shared_ptr<select_session>;
+
 }
 
 #endif // !__SESSION_DEFINE__H__

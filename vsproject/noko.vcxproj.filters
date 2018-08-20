@@ -31,6 +31,12 @@
     <Filter Include="common\md5">
       <UniqueIdentifier>{6c40cd77-9489-4240-9ae7-47c3e46b433b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="net\define">
+      <UniqueIdentifier>{85c9bc51-7641-4686-b9b4-38e3467a2223}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="proto">
+      <UniqueIdentifier>{66a015ef-17a7-4f8a-90e5-7c9e94da4f96}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -54,20 +60,11 @@
     <ClInclude Include="..\net\session\session.h">
       <Filter>net\session</Filter>
     </ClInclude>
-    <ClInclude Include="..\message\message.h">
-      <Filter>message</Filter>
-    </ClInclude>
     <ClInclude Include="..\message\message_translate.h">
       <Filter>message</Filter>
     </ClInclude>
     <ClInclude Include="..\include\Singleton.h">
       <Filter>common</Filter>
-    </ClInclude>
-    <ClInclude Include="..\net\Netdefine.h">
-      <Filter>net</Filter>
-    </ClInclude>
-    <ClInclude Include="..\net\nk_file_api.h">
-      <Filter>net</Filter>
     </ClInclude>
     <ClInclude Include="..\net\select\select_socket_api.h">
       <Filter>net\select</Filter>
@@ -90,6 +87,21 @@
     <ClInclude Include="..\include\md5\md5.h">
       <Filter>common\md5</Filter>
     </ClInclude>
+    <ClInclude Include="..\net\nk_socket_ex.h">
+      <Filter>net\select</Filter>
+    </ClInclude>
+    <ClInclude Include="..\net\Netdefine.h">
+      <Filter>net\define</Filter>
+    </ClInclude>
+    <ClInclude Include="..\message\select_message_handler.h">
+      <Filter>message</Filter>
+    </ClInclude>
+    <ClInclude Include="..\message\c2smessage.pb.h">
+      <Filter>message</Filter>
+    </ClInclude>
+    <ClInclude Include="..\message\messageInterface.h">
+      <Filter>message</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -107,14 +119,8 @@
     <ClCompile Include="..\net\session\session.cpp">
       <Filter>net\session</Filter>
     </ClCompile>
-    <ClCompile Include="..\message\message.cpp">
-      <Filter>message</Filter>
-    </ClCompile>
     <ClCompile Include="..\message\message_translate.cpp">
       <Filter>message</Filter>
-    </ClCompile>
-    <ClCompile Include="..\net\nk_file_api.cpp">
-      <Filter>net</Filter>
     </ClCompile>
     <ClCompile Include="..\net\select\select_socket_api.cpp">
       <Filter>net\select</Filter>
@@ -130,6 +136,18 @@
     </ClCompile>
     <ClCompile Include="..\include\md5\md5.cpp">
       <Filter>common\md5</Filter>
+    </ClCompile>
+    <ClCompile Include="..\net\nk_socket_ex.cpp">
+      <Filter>net\select</Filter>
+    </ClCompile>
+    <ClCompile Include="..\message\select_message_handler.cpp">
+      <Filter>message</Filter>
+    </ClCompile>
+    <ClCompile Include="..\message\c2smessage.pb.cc">
+      <Filter>message</Filter>
+    </ClCompile>
+    <ClCompile Include="..\message\messageInterface.cpp">
+      <Filter>message</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

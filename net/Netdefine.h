@@ -31,4 +31,34 @@ enum emBufferSize
 #define SELECT_TV_USEC 0
 #define SELECT_TIME_COUT_TICK 10
 
+enum emServerType
+{
+	em_SID_LOGIN = 1,
+	em_SID_BIGWORLD = 2,
+	em_SID_GAMELOGIC = 3,
+	em_SID_DB = 4,
+	em_SID_SMALLWORLD = 5,
+	em_SID_TRADE = 6,
+
+};
+
+#pragma pack(push)
+#pragma pack(1)
+#pragma warning(disable:4996)
+
+struct TESGHandler
+{
+	int8 nSID;
+	char szbuff[em_buffer_2048];
+
+	TESGHandler()
+	{
+		memset(this, 0, sizeof(*this));
+	}
+};
+
+
+#pragma pack(pop)
+
+
 #endif

@@ -7,7 +7,7 @@
 #include <transport/TBufferTransports.h>
 #include <protocol/TProtocol.h>
 #include <protocol/TBinaryProtocol.h>
-#include "message.h"
+
 #include "Netdefine.h"
 
 namespace noko {

@@ -1,4 +1,4 @@
 cd Protogen
-protoc.exe -I=..\proto\c2smessage.proto --cpp_out=..\output\cpp  
+protoc.exe  --cpp_out=.  c2smessage.proto
 
 Pause

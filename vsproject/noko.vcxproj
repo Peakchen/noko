@@ -161,9 +161,11 @@
     <ClInclude Include="..\include\TimerHelper.h" />
     <ClInclude Include="..\include\utls.h" />
     <ClInclude Include="..\include\utlsImpl.h" />
-    <ClInclude Include="..\message\message.h" />
+    <ClInclude Include="..\message\c2smessage.pb.h" />
+    <ClInclude Include="..\message\messageInterface.h" />
     <ClInclude Include="..\message\message_translate.h" />
-    <ClInclude Include="..\net\nk_file_api.h" />
+    <ClInclude Include="..\message\select_message_handler.h" />
+    <ClInclude Include="..\net\nk_socket_ex.h" />
     <ClInclude Include="..\net\Netdefine.h" />
     <ClInclude Include="..\net\select\select_socket_api.h" />
     <ClInclude Include="..\net\select\select_tcp_server.h" />
@@ -178,9 +180,11 @@
     <ClCompile Include="..\include\md5\md5.cpp" />
     <ClCompile Include="..\include\TimerHelper.cpp" />
     <ClCompile Include="..\include\utls.cpp" />
-    <ClCompile Include="..\message\message.cpp" />
+    <ClCompile Include="..\message\c2smessage.pb.cc" />
+    <ClCompile Include="..\message\messageInterface.cpp" />
     <ClCompile Include="..\message\message_translate.cpp" />
-    <ClCompile Include="..\net\nk_file_api.cpp" />
+    <ClCompile Include="..\message\select_message_handler.cpp" />
+    <ClCompile Include="..\net\nk_socket_ex.cpp" />
     <ClCompile Include="..\net\select\select_socket_api.cpp" />
     <ClCompile Include="..\net\select\select_tcp_server.cpp" />
     <ClCompile Include="..\net\session\session.cpp" />
